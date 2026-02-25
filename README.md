@@ -1,14 +1,14 @@
 # A High-Dimensional Benchmark of Objective Functions and Biological Resolutions for Personalized Metabolic Phenotyping
 
-This repository contains the official computational pipeline, scripts, and analysis framework for the benchmarking study of 57,600 unique experimental configurations in personalized metabolic modeling.
+This repository contains the computational pipeline, statistical analysis scripts, and visualization framework for the benchmarking study of 57,600 unique experimental configurations in personalized metabolic modeling.
 
 ## 📂 Data Access & Setup
 
 To ensure reproducibility while maintaining a lightweight repository, all processed datasets and high-dimensional feature matrices are hosted on **Zenodo**.
 
 1. **Download Data:** Access the datasets via Zenodo: **[INSERT YOUR DOI LINK HERE]**
-2. **Extraction:** Extract the contents of the downloaded archive directly into the **root directory** of this repository.
-3. **Structure Check:** After extraction, your local directory structure must follow the numbered organization for the scripts to resolve file paths correctly:
+2. **Extraction:** Extract the contents of the archive directly into the **root directory** of this repository.
+3. **Structure Check:** For the scripts to resolve file paths correctly, the following directory structure must be maintained:
 
 ```
 .
@@ -18,7 +18,7 @@ To ensure reproducibility while maintaining a lightweight repository, all proces
 │   ├── 02_Statistical_Analysis/ # Core benchmarking logic
 │   ├── 03_Visualization/   # Figure generation
 │   └── makale/             # Manuscript-specific analysis scripts
-├── 1_Results/              # Raw simulation outputs
+├── 1_Results/              # Raw simulation outputs (Available on Zenodo)
 ├── 2_Features/             # Generated metabolic features
 ├── 3_Runstats/             # Execution and performance logs
 ├── 4_Parquets/             # Intermediate data in parquet format
@@ -29,24 +29,26 @@ To ensure reproducibility while maintaining a lightweight repository, all proces
 └── LICENSE
 ```
 
-## 🛠 Script Nomenclature & Usage
+## 🛠 Usage & Pipeline Logic
 
-The project follows a modular design. To execute the primary benchmarking workflow, run:
+The research workflow is divided into two primary phases:
+
+### Phase 1: High-Throughput Simulations (HPC)
+The initial generation of 57,600 metabolic flux profiles was performed on the **TRUBA High-Performance Computing (HPC)** cluster. Due to the massive computational requirements, these simulations are not intended to be run on standard local machines. The pre-calculated results of these simulations are provided in the Zenodo archive.
+
+### Phase 2: Post-Processing and Statistical Analysis
+The scripts in this repository focus on this phase. To generate the primary analysis tables, statistical summaries, and performance metrics reported in the paper, run:
+
 ```bash
 python 0_Scripts/master.py
 ```
 
-### Note on Naming Conventions
-Within the `0_Scripts/` and `0_Scripts/makale/` directories, you may encounter scripts with unconventional prefixes such as `aht_`, `ali_hoca_talep_`, or `biomarker_poc_`. 
+*Note: `master.py` serves as the orchestrator for data aggregation and statistical reporting from the pre-processed simulation outputs.*
 
-These files represent **targeted analysis modules, intermediate validation steps, and ad-hoc sensitivity tests** developed during specific phases of the research and internal verification (e.g., custom requests from supervisors or targeted data audits). While they follow an iterative naming convention, they contain the underlying logic for specific ground-truth comparisons reported in the study.
+## 📋 Script Nomenclature
+Within the `0_Scripts/` and `0_Scripts/makale/` directories, you may encounter scripts with unconventional prefixes (e.g., `aht_`, `ali_hoca_talep_`, `biomarker_poc_`). 
 
-## 🧬 Scientific Context
-This framework evaluates the following key aspects of metabolic phenotyping:
-* **Objective Functions:** Benchmarking across various mathematical formulations (ATP, Robust, etc.).
-* **Biological Resolutions:** Comparative analysis of Pathway_min, Pathway_max, and Pathway_mean.
-* **Sparsity Paradox:** Evaluating model performance across different feature density thresholds (Top 10% vs. Full Network).
-* **Transcriptomic Integration:** Implementation and validation of patient-specific constraints (Cr).
+These files represent **targeted analysis modules and ad-hoc sensitivity tests** developed during specific phases of the research and internal verification. While following an iterative naming convention, they contain the underlying logic for specific data audits and ground-truth comparisons reported in the study.
 
 ## 🎓 Citation
 If you use this code or the associated datasets in your research, please cite:

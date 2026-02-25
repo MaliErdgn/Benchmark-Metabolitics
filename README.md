@@ -6,7 +6,7 @@ This repository contains the computational pipeline, statistical analysis script
 
 To ensure reproducibility while maintaining a lightweight repository, all processed datasets and high-dimensional feature matrices are hosted on **Zenodo**.
 
-1. **Download Data:** Access the datasets via Zenodo: **[DOI]**
+1. **Download Data:** Access the datasets via Zenodo: **[D10.5281/zenodo.18770830I]**
 2. **Extraction:** Extract the contents of the archive directly into the **root directory** of this repository.
 3. **Structure Check:** For the scripts to resolve file paths correctly, the following directory structure must be maintained:
 
